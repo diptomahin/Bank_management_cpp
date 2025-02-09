@@ -94,7 +94,7 @@ int main()
         {
             cout << "\n1. Open an Account";
             cout << "\n2. Login";
-            cout << "\n4. Back to Bank Selection";
+            cout << "\n3. Back to Bank Selection";
             cout << "\nEnter your choice: ";
             cin >> option;
 
@@ -124,17 +124,21 @@ int main()
                     Cl_Accounts account = selected_bank->Cl_Balance_Enquiry(account_no);
                     if (account.getPassword() == password)
                     {
-                        cout << "\nLogin Successful!" << endl;
+                        cout << "\nLogin Successful!" << endl;  
+                        string fname = account.getFName();  
+                        string lname = account.getLName();
+                        string account_number = to_string(account.getAccNo());                  
+                        cout<<"\n" <<fname<<" "<<lname<<", Welcome to your account."<<endl;  
+                        cout<<"\n"<<"Account Number: "<<account_number<<endl;                     
                         while (true)
                         {
                             cout << "\n1. Balance Enquiry";
                             cout << "\n2. Deposit";
                             cout << "\n3. Withdrawal";
-                            cout << "\n4. Fund Transfer"; // Fund Transfer option after login
-                            cout << "\n5. Close Account";
-                            cout << "\n6. Show All Accounts";
-                            cout << "\n7. Fund Transfer";
-                            cout << "\n8. Logout";
+                            cout << "\n4. Close Account";
+                            cout << "\n5. Show All Accounts";
+                            cout << "\n6. Fund Transfer";
+                            cout << "\n7. Logout";
                             cout << "\nEnter your choice: ";
                             cin >> option;
 
@@ -158,30 +162,14 @@ int main()
                                 cout << "\nAmount Withdrawn Successfully." << endl;
                                 cout << account;
                                 break;
-                            case 4: // Fund Transfer logic here
-                                cout << "Enter recipient account number: ";
-                                cin >> to_account_no;
-                                cout << "Enter amount to transfer: ";
-                                cin >> amnts;
-
-                                try
-                                {
-                                    selected_bank->Transfer(account_no, to_account_no, amnts);
-                                    cout << "\nFund Transfer Successful!" << endl;
-                                }
-                                catch (const exception &e)
-                                {
-                                    cout << "\nTransfer Failed: " << e.what() << endl;
-                                }
-                                break;
-                            case 5:
+                            case 4:
                                 selected_bank->CloseAccount(account_no);
                                 cout << "\nAccount Closed Successfully." << endl;
                                 goto logout;
-                            case 6:
+                            case 5:
                                 selected_bank->ShowAllAccounts();
                                 break;
-                            case 7:
+                            case 6:
                                 cout << "Enter your account number: ";
                                 cin >> account_no;
                                 cout << "Enter recipient account number: ";
@@ -199,7 +187,7 @@ int main()
                                     cout << "\nTransfer Failed: " << e.what() << endl;
                                 }
                                 break;
-                            case 8:
+                            case 7:
                                 goto logout;
                             default:
                                 cout << "Invalid choice. Please try again.";
@@ -218,7 +206,7 @@ int main()
                     cout << "\nAccount Not Found.";
                 }
             }
-            else if (option == 4)
+            else if (option == 3)
             {
                 break;
             }
